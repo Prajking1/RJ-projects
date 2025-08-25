@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Building Solutions - IoT-enabled building technologies for intelligent infrastructure" />
+  <meta name="keywords" content="Smart Buildings, IoT, Building Automation, Energy Management, Access Control, RJ Projects" />
+  <meta name="author" content="RJ Projects" />
+  <title>Smart Building Solutions | RJ Projects</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Unified Color Palette */
+    :root {
+      --white: #ffffff;
+      --light-gray: #f5f4f4;
+      --off-white: #fefffa;
+      --black: #000000;
+      --deep-blue: #00539f;
+      --mint-green: #c3f1d5;
+      --very-light-gray: #fefefe;
+      --sky-blue: #5d95e2;
+      --charcoal: #282f39;
+      --medium-blue: #4073b3;
+    }
+    
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    
+    /* Modern Animations */
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .slide-in-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-left.visible { opacity: 1; transform: none; }
+    .slide-in-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-right.visible { opacity: 1; transform: none; }
+    
+    /* Glass Effect Styles */
+    .glass-container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 4px 24px 0 rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-container:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    /* Service Card Hover Effects */
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--deep-blue), var(--medium-blue));
+      transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen">
+  <!-- Sticky Header with Navigation -->
+  <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-3 select-none">
+        <img src="logo.png" alt="RJ Projects Pvt Ltd Logo" class="h-12 w-auto object-contain" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">About Us</a>
+        <a href="services.html" class="text-blue-600 font-medium transition-colors duration-200">Services</a>
+        <a href="industries.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Sectors</a>
+        <a href="projects.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Projects</a>
+        <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Blog</a>
+        
+        <!-- Contact Us Button -->
+        <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+          Contact Us
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 focus:outline-none hamburger">
+        <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-200 max-h-0 overflow-hidden transition-all duration-300">
+      <div class="px-6 py-4 space-y-4">
+        <a href="about.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">About Us</a>
+        <a href="services.html" class="block text-blue-600 font-medium py-2">Services</a>
+        <a href="industries.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Sectors</a>
+        <a href="projects.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Projects</a>
+        <a href="blog.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Blog</a>
+        <a href="contact.html" class="block bg-blue-600 text-white px-6 py-2 rounded-full font-medium text-center mt-4">Contact Us</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Spacer for fixed header -->
+  <div class="h-20"></div>
+
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div class="glass-container bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <h1 class="text-3xl md:text-5xl font-normal text-white mb-6 leading-tight">
+          Smart <span class="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">Building Solutions</span>
+        </h1>
+        <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          IoT-enabled intelligent building technologies for enhanced efficiency, security, and sustainability
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="fade-in">
+          <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-6">Intelligent Building Technologies</h2>
+          <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+            Our Smart Building Solutions integrate cutting-edge IoT technologies to create intelligent, connected, and energy-efficient buildings. We transform traditional infrastructure into smart ecosystems that optimize operations, enhance occupant comfort, and reduce operational costs.
+          </p>
+          <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+            From automated lighting and climate control to advanced security systems and real-time analytics, our comprehensive smart building solutions provide complete visibility and control over building operations.
+          </p>
+        </div>
+        <div class="slide-in-right">
+          <div class="relative overflow-hidden bg-gray-100 rounded-2xl shadow-lg">
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Smart Building Technologies" class="w-full h-96 object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section class="py-20 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">Smart Building Features</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Comprehensive IoT solutions that transform buildings into intelligent, connected environments</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Automated Lighting -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Automated Lighting</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Intelligent lighting systems with motion sensors, daylight harvesting, and occupancy-based controls for optimal energy efficiency and user comfort.
+          </p>
+        </div>
+        
+        <!-- Access Control -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Access Control</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Advanced access control systems with biometric authentication, card readers, and mobile credentials for enhanced security and convenience.
+          </p>
+        </div>
+        
+        <!-- Energy Management -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Energy Management</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Real-time energy monitoring, demand response systems, and predictive analytics to optimize energy consumption and reduce costs.
+          </p>
+        </div>
+        
+        <!-- Building Analytics -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Building Analytics</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Advanced analytics and reporting tools providing insights into building performance, occupancy patterns, and operational efficiency.
+          </p>
+        </div>
+        
+        <!-- Climate Control -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Climate Control</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Smart HVAC systems with zone-based controls, predictive maintenance, and integration with weather data for optimal comfort.
+          </p>
+        </div>
+        
+        <!-- IoT Integration -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">IoT Integration</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Seamless integration of IoT devices, sensors, and systems for unified building management and data-driven decision making.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">Benefits of Smart Buildings</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Transform your building into an intelligent, efficient, and sustainable environment</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Cost Savings</h3>
+          <p class="text-gray-600 text-sm">Up to 30% reduction in energy costs through intelligent automation and optimization</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Enhanced Comfort</h3>
+          <p class="text-gray-600 text-sm">Improved occupant comfort through personalized climate and lighting controls</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Security</h3>
+          <p class="text-gray-600 text-sm">Advanced security systems with real-time monitoring and automated responses</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Sustainability</h3>
+          <p class="text-gray-600 text-sm">Reduced carbon footprint through energy-efficient operations and green building practices</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-6 bg-blue-600">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-normal text-white mb-6">Ready to Make Your Building Smart?</h2>
+      <p class="text-xl text-blue-100 mb-8">Transform your building into an intelligent, efficient, and sustainable environment with our smart building solutions.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+          Get In Touch
+        </a>
+        <a href="services.html" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-medium transition-all duration-300">
+          View All Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <img src="logo.png" alt="RJ Projects Logo" class="h-12 w-auto mb-4">
+          <p class="text-gray-300 mb-4">Leading MEP solutions provider with over 25 years of experience in infrastructure development.</p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="industries.html" class="hover:text-white transition-colors">Sectors</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="plumbing.html" class="hover:text-white transition-colors">Plumbing & Sanitation</a></li>
+            <li><a href="firefighting.html" class="hover:text-white transition-colors">Fire Fighting</a></li>
+            <li><a href="electrification.html" class="hover:text-white transition-colors">Electrification</a></li>
+            <li><a href="bas-bms.html" class="hover:text-white transition-colors">BAS/BMS</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Contact Info</h3>
+          <div class="space-y-2 text-gray-300">
+            <p>C 18, Sector 105, Noida 201305</p>
+            <p>Phone: +91 9818479577</p>
+            <p>Email: rjprojects@rediffmail.com</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-300">
+        <p>&copy; 2024 RJ Projects Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('active');
+      if (mobileMenu.style.maxHeight === '0px' || !mobileMenu.style.maxHeight) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+      }
+    });
+    
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.maxHeight = '0px';
+        menuBtn.classList.remove('active');
+      });
+    });
+    
+    // Scroll-based reveal animations
+    function sectionRevealObserver() {
+      const fadeEls = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+      const reveal = (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+      const observer = new window.IntersectionObserver(reveal, { threshold: 0.1 });
+      fadeEls.forEach(el => observer.observe(el));
+    }
+    
+    window.addEventListener('DOMContentLoaded', sectionRevealObserver);
+    
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 10) {
+        navbar.classList.add('shadow-lg');
+      } else {
+        navbar.classList.remove('shadow-lg');
+      }
+    });
+  </script>
+</body>
+</html>
