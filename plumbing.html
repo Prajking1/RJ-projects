@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plumbing & Sewerage Systems - RJ Projects MEP Solutions" />
+  <meta name="keywords" content="Plumbing, sewerage, water supply, drainage, RJ Projects" />
+  <meta name="author" content="RJ Projects" />
+  <title>Plumbing & Sewerage Systems | RJ Projects</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Unified Color Palette */
+    :root {
+      --white: #ffffff;
+      --light-gray: #f5f4f4;
+      --off-white: #fefffa;
+      --black: #000000;
+      --deep-blue: #00539f;
+      --mint-green: #c3f1d5;
+      --very-light-gray: #fefefe;
+      --sky-blue: #5d95e2;
+      --charcoal: #282f39;
+      --medium-blue: #4073b3;
+    }
+    
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    
+    /* Modern Animations */
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .slide-in-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-left.visible { opacity: 1; transform: none; }
+    .slide-in-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-right.visible { opacity: 1; transform: none; }
+    
+    /* Glass Effect Styles */
+    .glass-container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 4px 24px 0 rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-container:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    /* Service Card Hover Effects */
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--deep-blue), var(--medium-blue));
+      transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen">
+  <!-- Sticky Header with Navigation -->
+  <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-3 select-none">
+        <img src="logo.png" alt="RJ Projects Pvt Ltd Logo" class="h-12 w-auto object-contain" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">About Us</a>
+        <a href="services.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Services</a>
+        <a href="industries.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Sectors</a>
+        <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Blog</a>
+        
+        <!-- Contact Us Button -->
+        <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+          Contact Us
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 focus:outline-none hamburger">
+        <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-200 max-h-0 overflow-hidden transition-all duration-300">
+      <div class="px-6 py-4 space-y-4">
+        <a href="about.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">About Us</a>
+        <a href="services.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Services</a>
+        <a href="industries.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Sectors</a>
+        <a href="blog.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Blog</a>
+        <a href="contact.html" class="block bg-blue-600 text-white px-6 py-2 rounded-full font-medium text-center mt-4">Contact Us</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Spacer for fixed header -->
+  <div class="h-20"></div>
+
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden" style="background-image: url('plumbing.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div class="glass-container bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <h1 class="text-3xl md:text-5xl font-normal text-white mb-6 leading-tight">
+          <span class="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">Plumbing & Sewerage</span> Systems
+        </h1>
+        <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          Comprehensive water management solutions including supply, drainage, treatment plants, and swimming pool systems
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Complete Water Management Solutions</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Comprehensive plumbing and sewerage systems for all types of projects</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <p class="text-gray-700 text-lg leading-relaxed">
+            Our plumbing and sewerage systems provide complete water management solutions for residential, commercial, and industrial projects. We specialize in designing and installing efficient water supply, drainage, and waste management systems that ensure optimal performance and sustainability.
+          </p>
+          <p class="text-gray-700 text-lg leading-relaxed">
+            From water supply networks to advanced treatment plants, our comprehensive solutions include all components necessary for effective water management. We use high-quality materials and modern technologies to deliver reliable, long-lasting systems.
+          </p>
+        </div>
+        <div class="relative">
+          <img src="plumbing.jpg" alt="Plumbing Systems" class="w-full h-96 object-cover rounded-2xl shadow-xl">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plumbing Components Section -->
+  <section class="py-20 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Plumbing System Components</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Complete range of plumbing and sewerage equipment for all applications</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Water Supply Systems -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden rounded-lg mb-6 h-48">
+            <img src="https://www.beltecno-global.com/hubfs/Water_supply.png" alt="Water Supply Systems" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Water Supply Systems</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Complete internal and external water supply networks with efficient distribution and pressure management systems.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li>• Internal water supply</li>
+            <li>• External water supply</li>
+            <li>• Water distribution networks</li>
+            <li>• Pressure management</li>
+          </ul>
+        </div>
+        
+        <!-- Drainage Systems -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden rounded-lg mb-6 h-48">
+            <img src="https://www.silverleafswppp.com/wp-content/uploads/2024/08/Stormwater-Drainage-System.jpg" alt="Drainage Systems" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Drainage Systems</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Comprehensive internal and external drainage systems for efficient water removal and flood prevention.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li>• Internal drainage system</li>
+            <li>• External drainage system</li>
+            <li>• Storm water management</li>
+            <li>• Flood prevention</li>
+          </ul>
+        </div>
+        
+        <!-- Sewerage Systems -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden rounded-lg mb-6 h-48">
+            <img src="https://www.arcgis.com/sharing/rest/content/items/0ad80e4f74a54ff8ad3753891870b906/info/thumbnail/ago_downloaded.jpg?w=800" alt="Sewerage Systems" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Sewerage Systems</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Complete internal and external sewerage networks with proper waste collection and disposal systems.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li>• Internal sewerage</li>
+            <li>• External sewerage</li>
+            <li>• Waste collection</li>
+            <li>• Disposal systems</li>
+          </ul>
+        </div>
+        
+        <!-- Water Treatment Plants -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden rounded-lg mb-6 h-48">
+            <img src="https://mentorwater.com/wp-content/uploads/2023/12/what-are-wastewater-treatment-plants.jpg" alt="Water Treatment Plants" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Water Treatment Plants</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Advanced water treatment and purification systems for clean, safe water supply in various applications.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li>• Water purification</li>
+            <li>• Filtration systems</li>
+            <li>• Chemical treatment</li>
+            <li>• Quality monitoring</li>
+          </ul>
+        </div>
+        
+        <!-- Swimming Pool Systems -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden rounded-lg mb-6 h-48">
+            <img src="https://www.millenniumpool.com/wp-content/uploads/2022/06/salt-water-system-1.jpg" alt="Swimming Pool Systems" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Swimming Pool Systems</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Complete swimming pool plumbing systems including circulation, filtration, and chemical treatment.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li>• Pool circulation</li>
+            <li>• Filtration systems</li>
+            <li>• Chemical treatment</li>
+            <li>• Water quality control</li>
+          </ul>
+        </div>
+        
+        <!-- Sanitation Systems -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden rounded-lg mb-6 h-48">
+            <img src="https://www.jcfranceindustrie.fr/content/uploads/2023/04/jc-france-water-sanitation-scaled.jpg" alt="Sanitation Systems" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Sanitation Systems</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Comprehensive sanitation and hygiene systems for residential, commercial, and industrial facilities.
+          </p>
+          <ul class="text-gray-600 text-sm space-y-2">
+            <li>• Sanitary fixtures</li>
+            <li>• Waste disposal</li>
+            <li>• Hygiene systems</li>
+            <li>• Maintenance services</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Our Plumbing Solutions</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Delivering reliable, efficient, and sustainable water management systems</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Quality Materials</h3>
+          <p class="text-gray-600 text-sm">Premium quality pipes, fittings, and equipment ensuring long-lasting performance</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Energy Efficient</h3>
+          <p class="text-gray-600 text-sm">Water-efficient systems designed to minimize waste and reduce operational costs</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">24/7 Support</h3>
+          <p class="text-gray-600 text-sm">Round-the-clock maintenance and emergency support services</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Expert Installation</h3>
+          <p class="text-gray-600 text-sm">Professional installation by certified plumbers with years of experience</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-6 bg-blue-600">
+    <div class="max-w-4xl mx-auto text-center">
+              <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready for Your Plumbing Project?</h2>
+      <p class="text-xl text-blue-100 mb-8">Let's discuss your plumbing requirements and provide the perfect water management solution for your facility.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+          Get Quote
+        </a>
+        <a href="services.html" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-medium transition-all duration-300">
+          All Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <img src="logo.png" alt="RJ Projects Logo" class="h-12 w-auto mb-4">
+          <p class="text-gray-300 mb-4">Leading MEP solutions provider with over 25 years of experience in infrastructure development.</p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-normal mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="industries.html" class="hover:text-white transition-colors">Sectors</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-normal mb-4">Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="plumbing.html" class="hover:text-white transition-colors">Plumbing & Sanitation</a></li>
+            <li><a href="firefighting.html" class="hover:text-white transition-colors">Fire Fighting</a></li>
+            <li><a href="electrification.html" class="hover:text-white transition-colors">Electrification</a></li>
+            <li><a href="hvac.html" class="hover:text-white transition-colors">HVAC Systems</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-normal mb-4">Contact Info</h3>
+          <div class="space-y-2 text-gray-300">
+            <p>C 18, Sector 105, Noida 201305</p>
+            <p>Phone: +91 9818479577</p>
+            <p>Email: rjprojects@rediffmail.com</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-300">
+        <p>&copy; 2024 RJ Projects Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('active');
+      if (mobileMenu.style.maxHeight === '0px' || !mobileMenu.style.maxHeight) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+      } else {
+        mobileMenu.style.maxHeight = '0px';
+      }
+    });
+    
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.maxHeight = '0px';
+        menuBtn.classList.remove('active');
+      });
+    });
+    
+    // Scroll-based reveal animations
+    function sectionRevealObserver() {
+      const fadeEls = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+      const reveal = (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+      const observer = new window.IntersectionObserver(reveal, { threshold: 0.1 });
+      fadeEls.forEach(el => observer.observe(el));
+    }
+    
+    window.addEventListener('DOMContentLoaded', sectionRevealObserver);
+    
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 10) {
+        navbar.classList.add('shadow-lg');
+      } else {
+        navbar.classList.remove('shadow-lg');
+      }
+    });
+  </script>
+</body>
+</html> 
