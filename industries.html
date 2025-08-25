@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Business Sectors - RJProjects" />
+  <meta name="keywords" content="Business Sectors, Commercial Real Estate, Public Sector, Residential, Healthcare, Data Centers, Renewable Energy, RJProjects" />
+  <meta name="author" content="RJProjects" />
+  <title>Business Sectors | RJProjects</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Unified Color Palette */
+    :root {
+      --white: #ffffff;
+      --light-gray: #f5f4f4;
+      --off-white: #fefffa;
+      --black: #000000;
+      --deep-blue: #00539f;
+      --mint-green: #c3f1d5;
+      --very-light-gray: #fefefe;
+      --sky-blue: #5d95e2;
+      --charcoal: #282f39;
+      --medium-blue: #4073b3;
+    }
+    
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    
+    /* Modern Typography */
+    .hero-title { 
+      font-size: clamp(3rem, 8vw, 6rem); 
+      font-weight: 900; 
+      line-height: 1.1; 
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+    }
+    
+    .section-title { 
+      font-size: clamp(2rem, 4vw, 3.5rem); 
+      font-weight: 800; 
+      line-height: 1.2; 
+      color: var(--charcoal);
+    }
+    
+    .section-subtitle { 
+      font-size: clamp(1.1rem, 2vw, 1.3rem); 
+      font-weight: 400; 
+      color: var(--charcoal); 
+      line-height: 1.6; 
+    }
+    
+    /* Modern Animations */
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .slide-in-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-left.visible { opacity: 1; transform: none; }
+    .slide-in-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-right.visible { opacity: 1; transform: none; }
+    
+    /* Modern Background Effects */
+    .hero-bg {
+      background: linear-gradient(135deg, var(--light-gray) 0%, var(--off-white) 50%, var(--mint-green) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('industry/Industry.jpg') center/cover no-repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .accent-gradient {
+      background: linear-gradient(135deg, var(--deep-blue) 0%, var(--charcoal) 100%);
+    }
+    
+    /* Modern Card Designs */
+    .sector-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sector-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--deep-blue), var(--medium-blue));
+      transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .sector-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .sector-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      border-color: var(--deep-blue);
+    }
+    
+    .sector-image {
+      border-radius: 12px;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .sector-card:hover .sector-image {
+      transform: scale(1.05);
+    }
+    
+    /* Modern Navigation */
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #007bff;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen">
+  <!-- Sticky Header with Navigation -->
+  <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-3 select-none">
+        <img src="logo.png" alt="RJ Projects Pvt Ltd Logo" class="h-12 w-auto object-contain" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">About Us</a>
+        <a href="services.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Services</a>
+        <a href="industries.html" class="text-blue-600 font-medium transition-colors duration-200">Sectors</a>
+        <a href="projects.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Projects</a>
+        <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Blog</a>
+        
+        <!-- Contact Us Button -->
+        <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+          Contact Us
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 focus:outline-none">
+        <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-200 max-h-0 overflow-hidden transition-all duration-300">
+      <div class="px-6 py-4 space-y-4">
+        <a href="about.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">About Us</a>
+        <a href="services.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Services</a>
+        <a href="industries.html" class="block text-blue-600 font-medium py-2">Sectors</a>
+        <a href="projects.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Projects</a>
+        <a href="blog.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Blog</a>
+        <a href="contact.html" class="block bg-blue-600 text-white px-6 py-2 rounded-full font-medium text-center mt-4">Contact Us</a>
+      </div>
+    </div>
+  </header>
+  
+  <div style="height:80px;"></div>
+
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden" style="background-image: url('industry/Industry.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div class="glass-container bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <h1 class="text-3xl md:text-5xl font-normal text-white mb-6 leading-tight">
+          Our <span class="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">Business Sectors</span>
+        </h1>
+        <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          Comprehensive MEP solutions across diverse industries, delivered with innovation and expertise
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sectors Overview Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">Our Business Sectors</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">From concept to completion, we deliver excellence across diverse industries and sectors</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Commercial Real Estate -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Commercial Real Estate.jpg" alt="Commercial Real Estate" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Commercial Real Estate</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            End-to-end MEP and infrastructure solutions for office parks, corporate towers, and business hubs with focus on sustainability, quality assured, and energy efficiency.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Public Sector Projects -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Public Sector Projects.jpg" alt="Public Sector Projects" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Public Sector Projects</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            From municipal infrastructure to government buildings, we support nation-building through compliant, reliable, and large-scale project execution.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Residential Complexes -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Residential Complexes.jpg" alt="Residential Complexes" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Residential Complexes</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Design and implementation of plumbing, electrification, fire quality assured, and HVAC systems for high-rise apartments, gated societies, and townships.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Hospitality & Retail -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Hospitality & Retail Spaces.jpg" alt="Hospitality & Retail Spaces" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Hospitality & Retail Spaces</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Seamless integration of aesthetics with HVAC, fire-fighting, and smart building systems for enhanced guest experience in malls and hotels.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Industrial Facilities -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Industrial Facilities.jpg" alt="Industrial Facilities" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Industrial Facilities</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Robust fire protection, electrification, and utility systems built to withstand industrial stress and meet regulatory standards.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Power Plants -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Power Plants.jpg" alt="Power Plants" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Power Plants</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Technical systems that support plant operations, quality assured mechanisms, and optimal climate control under high-stress environments.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Healthcare & Hospitals -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Healthcare & Hospitals.jpg" alt="Healthcare & Hospitals" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Healthcare & Hospitals</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Healthcare-grade HVAC, medical gas systems, and fire quality assured solutions to meet stringent hygiene and operational needs.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Mass Transit Systems -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Mass Transit Systems.jpg" alt="Mass Transit Systems" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Mass Transit Systems</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Integration of ventilation, fire quality assured, communication wiring, and electricals for high-footfall, high-security transport networks.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Educational Institutions -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Educational Institutions.jpg" alt="Educational Institutions" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Educational Institutions</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Smart MEP solutions supporting modern learning environments with optimal lighting, ventilation, and quality assured features.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Data Centers -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Data Centers.jpg" alt="Data Centers" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Data Centers</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Precision MEP services ensuring uninterrupted power, fire suppression, and efficient climate control for high-value digital infrastructure.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- IBMS -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Integrated Building Management Systems (IBMS).jpg" alt="Integrated Building Management Systems" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Integrated Building Management Systems (IBMS)</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Smart automation and monitoring systems to centralize building controls covering lighting, HVAC, security, and energy management.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Renewable Energy -->
+        <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+            <img src="industry/Renewable Energy.jpg" alt="Renewable Energy" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">Renewable Energy</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            Support for solar and other renewable setups through structured wiring, energy-efficient HVAC, and compliant quality assured systems.
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Gallery Section -->
+  <section class="py-20 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Project Gallery</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Explore our diverse portfolio of successful projects across various sectors and industries</p>
+      </div>
+      
+      <!-- Airbnb-style Image Slider -->
+      <div class="relative">
+        <!-- Main Slider Container -->
+        <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+          <div id="slider-container" class="flex transition-transform duration-700 ease-in-out">
+            <!-- Project 1 -->
+            <div class="w-full flex-shrink-0 relative">
+              <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80" 
+                   alt="Commercial Project" class="w-full h-[500px] md:h-[600px] object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 class="text-2xl md:text-3xl font-semibold mb-2">Commercial Complex Development</h3>
+                <p class="text-lg opacity-90">State-of-the-art office complex with integrated MEP systems</p>
+              </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="w-full flex-shrink-0 relative">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
+                   alt="Residential Project" class="w-full h-[500px] md:h-[600px] object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 class="text-2xl md:text-3xl font-semibold mb-2">Luxury Residential Tower</h3>
+                <p class="text-lg opacity-90">Premium residential development with smart home automation</p>
+              </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="w-full flex-shrink-0 relative">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80" 
+                   alt="Healthcare Project" class="w-full h-[500px] md:h-[600px] object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 class="text-2xl md:text-3xl font-semibold mb-2">Modern Hospital Facility</h3>
+                <p class="text-lg opacity-90">Advanced healthcare infrastructure with specialized MEP systems</p>
+              </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="w-full flex-shrink-0 relative">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                   alt="Industrial Project" class="w-full h-[500px] md:h-[600px] object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 class="text-2xl md:text-3xl font-semibold mb-2">Industrial Manufacturing Plant</h3>
+                <p class="text-lg opacity-90">Large-scale industrial facility with robust automation systems</p>
+              </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="w-full flex-shrink-0 relative">
+              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                   alt="Data Center Project" class="w-full h-[500px] md:h-[600px] object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <h3 class="text-2xl md:text-3xl font-semibold mb-2">Data Center Infrastructure</h3>
+                <p class="text-lg opacity-90">High-performance data center with precision cooling and power systems</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button id="prev-slide" class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 focus:outline-none">
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button id="next-slide" class="absolute right-6 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 focus:outline-none">
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        
+        <!-- Dot Navigation -->
+        <div id="dot-navigation" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3">
+          <button class="w-3 h-3 bg-white/70 rounded-full hover:bg-white transition-colors duration-300 active-dot"></button>
+          <button class="w-3 h-3 bg-white/70 rounded-full hover:bg-white transition-colors duration-300"></button>
+          <button class="w-3 h-3 bg-white/70 rounded-full hover:bg-white transition-colors duration-300"></button>
+          <button class="w-3 h-3 bg-white/70 rounded-full hover:bg-white transition-colors duration-300"></button>
+          <button class="w-3 h-3 bg-white/70 rounded-full hover:bg-white transition-colors duration-300"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="py-20 accent-gradient">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="fade-in">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Transform Your Sector?</h2>
+        <p class="text-xl text-gray-300 mb-8">Let's discuss how our expertise can drive innovation and excellence in your industry.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="contact.html" class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+            Get Started Today
+          </a>
+          <a href="projects.html" class="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full font-semibold transition-all duration-300">
+            View Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <img src="logo.png" alt="RJ Projects Logo" class="h-12 w-auto mb-4">
+          <p class="text-gray-300 mb-4">Leading MEP solutions provider with over 25 years of experience in infrastructure development.</p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="industries.html" class="hover:text-white transition-colors">Sectors</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="plumbing.html" class="hover:text-white transition-colors">Plumbing & Sanitation</a></li>
+            <li><a href="firefighting.html" class="hover:text-white transition-colors">Fire Fighting</a></li>
+            <li><a href="electrification.html" class="hover:text-white transition-colors">Electrification</a></li>
+            <li><a href="bas-bms.html" class="hover:text-white transition-colors">BAS/BMS</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Contact Info</h3>
+          <div class="space-y-2 text-gray-300">
+            <p>C 18, Sector 105, Noida 201305</p>
+            <p>Phone: +91 9818479577</p>
+            <p>Email: rjprojects@rediffmail.com</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-300">
+        <p>&copy; 2024 RJ Projects Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', function() {
+      isMenuOpen = !isMenuOpen;
+      
+      if (isMenuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenuBtn.classList.add('open');
+      } else {
+        mobileMenu.style.maxHeight = '0';
+        mobileMenuBtn.classList.remove('open');
+      }
+    });
+
+    // Scroll-based reveal animations
+    function sectionRevealObserver() {
+      const fadeEls = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+      const reveal = (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.getAttribute('data-delay') || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, delay * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+      const observer = new window.IntersectionObserver(reveal, { threshold: 0.1 });
+      fadeEls.forEach(el => observer.observe(el));
+    }
+    
+    window.addEventListener('DOMContentLoaded', sectionRevealObserver);
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Airbnb-style Image Slider functionality
+    const sliderContainer = document.getElementById('slider-container');
+    const prevSlideBtn = document.getElementById('prev-slide');
+    const nextSlideBtn = document.getElementById('next-slide');
+    const dotNavigation = document.getElementById('dot-navigation');
+    const slides = sliderContainer.children;
+    let currentIndex = 0;
+    let autoPlayInterval;
+
+    function updateSlider() {
+      sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      updateDots();
+    }
+
+    function updateDots() {
+      Array.from(dotNavigation.children).forEach((dot, index) => {
+        if (index === currentIndex) {
+          dot.classList.add('active-dot');
+          dot.style.backgroundColor = 'white';
+        } else {
+          dot.classList.remove('active-dot');
+          dot.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+        }
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateSlider();
+      resetAutoPlay();
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateSlider();
+      resetAutoPlay();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateSlider();
+      resetAutoPlay();
+    }
+
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    function resetAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    // Event Listeners
+    nextSlideBtn.addEventListener('click', nextSlide);
+    prevSlideBtn.addEventListener('click', prevSlide);
+
+    Array.from(dotNavigation.children).forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Pause on hover
+    sliderContainer.parentElement.addEventListener('mouseenter', stopAutoPlay);
+    sliderContainer.parentElement.addEventListener('mouseleave', startAutoPlay);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    // Touch/Swipe support
+    let touchStartX = 0;
+    sliderContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+    sliderContainer.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      if (touchEndX < touchStartX - 50) { // Swiped left
+        nextSlide();
+      } else if (touchEndX > touchStartX + 50) { // Swiped right
+        prevSlide();
+      }
+    });
+
+    // Initialize slider
+    updateSlider();
+    startAutoPlay();
+  </script>
+</body>
+</html> 

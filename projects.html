@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | RJProjects</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; }
+    .project-img {
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .group:hover .project-img {
+      transform: scale(1.07);
+    }
+    .project-overlay {
+      transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    .group:hover .project-overlay, .group:focus-within .project-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (max-width: 640px) {
+      /* Always show overlay on mobile */
+      .project-overlay {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+      }
+    }
+    /* Blur effect for non-hovered cards */
+    .project-card-peer:has(:hover), .project-card-peer:has(:focus-within) {
+      /* Only apply on desktop */
+    }
+    .project-card-peer:has(:hover) .group:not(:hover),
+    .project-card-peer:has(:focus-within) .group:not(:focus-within) {
+      filter: blur(4px);
+      transition: filter 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .project-card-peer .group:hover, .project-card-peer .group:focus-within {
+      filter: none;
+    }
+    @media (max-width: 640px) {
+      .project-card-peer .group { filter: none !important; }
+    }
+    /* Shimmer effect for CTA banner */
+    .shimmer-banner {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -60%;
+      width: 60%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+      animation: shimmer-move 2.5s infinite;
+    }
+    @keyframes shimmer-move {
+      0% { left: -60%; }
+      100% { left: 120%; }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 1s ease-out both;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 1s cubic-bezier(.4,0,.2,1) both;
+    }
+    .delay-200 { animation-delay: 0.2s; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Sticky Header with Navigation -->
+  <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-3 select-none">
+        <img src="logo.png" alt="RJ Projects Pvt Ltd Logo" class="h-12 w-auto object-contain" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">About Us</a>
+        <a href="services.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Services</a>
+        <a href="industries.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Sectors</a>
+        <a href="projects.html" class="text-blue-600 font-medium transition-colors duration-200">Projects</a>
+        <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Blog</a>
+        
+        <!-- Contact Us Button -->
+        <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+          Contact Us
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 focus:outline-none">
+        <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-200 max-h-0 overflow-hidden transition-all duration-300">
+      <div class="px-6 py-4 space-y-4">
+        <a href="about.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">About Us</a>
+        <a href="services.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Services</a>
+        <a href="industries.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Sectors</a>
+        <a href="projects.html" class="block text-blue-600 font-medium py-2">Projects</a>
+        <a href="blog.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Blog</a>
+        <a href="contact.html" class="block bg-blue-600 text-white px-6 py-2 rounded-full font-medium text-center mt-4">Contact Us</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Spacer for fixed header -->
+  <div class="h-20"></div>
+
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden" style="background-image: url('https://tse1.mm.bing.net/th/id/OIP.w0wpNHsB9JuhC-QzHx7FFwHaDQ?cb=thfvnext&w=955&h=421&rs=1&pid=ImgDetMain&o=7&rm=3'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div class="glass-container bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <h1 class="text-3xl md:text-5xl font-normal text-white mb-6 leading-tight">
+          Our <span class="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">Projects</span>
+        </h1>
+        <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          From blueprint to reality, our work shapes the future of infrastructure
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Overview Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Landmark Projects</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">From concept to completion, we deliver excellence across diverse sectors and industries</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Project Cards Start -->
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://lh3.googleusercontent.com/Q7d0ZGeXaYUemV8OIBTcZSxQj1nxKaffRhw2f8jrUYNQ57Loa0vfJ23OAMOWs-jr6fy6N9-7Rsa-8bdlB_T27M0NOCg6TbVJ04rc" alt="Central Court Housing Project" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Central Court Housing Project, Moradabad</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Delivered plumbing, firefighting, electrical, ventilation, fire alarm, and CCTV systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://www.oneindia.com/img/1200x60x675/2022/08/homi-bhabha-cancer-hospital-1661257365.jpg" alt="Homibhabha Hospital, Mohali" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Homibhabha Hospital, Mohali</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Executed plumbing works ensuring efficient water systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://th.bing.com/th/id/R.8b46f183ee68a8d5fc0a9fa993dded22?rik=vi14W5%2bEEJbZbg&riu=http%3a%2f%2fwww.shukhobrishti.com%2fstatic%2fimages%2ftemplate%2fshukhobrishti%2fgallery%2fEXT_5.jpg&ehk=izo0%2fumU07mnxDtYP1DJeu4lV3W7qHYshDEEnhE4qGI%3d&risl=&pid=ImgRaw&r=0" alt="RBI Housing Complex, Hauz Khas, Delhi" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">RBI Housing Complex, Hauz Khas, Delhi</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Completed plumbing, fire quality assured, STP, and swimming pool systems.
+        </p>
+      </div>
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://www.realtynmore.com/wp-content/uploads/2020/03/NBCC-Amrapali.jpg" alt="Amrapali Awas Vikas Yojna, Lucknow" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Amrapali Awas Vikas Yojna, Lucknow</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Delivered complete plumbing and sanitary systems.
+        </p>
+      </div>
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://dynamic.realestateindia.com/proj_images/project28623/proj_header_image-28623-770x400.jpg" alt="Imperial Towers, Sector 128, Noida" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Imperial Towers, Sector 128, Noida</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Installed fire fighting, deluge, and fire alarm systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://media.biltrax.com/wp-content/uploads/2023/09/News-Article-Cover-Images-2023-09-08T130125.389-1080x608.png" alt="Kalypso Court, Sector 128, Noida" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Kalypso Court, Sector 128, Noida</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Executed plumbing and sewerage systems.
+        </p>
+      </div>
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://media.assettype.com/bloombergquint/2024-05/8b44fa22-9c69-44f0-a749-f46c30d7afd2/pavilion_court_wish_town__noida.jpg?rect=0%2C0%2C640%2C336&w=1200&auto=format%2Ccompress&ogImage=true" alt="Imperial Towers (HVAC), Sector 128, Noida" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Imperial Towers (HVAC), Sector 128, Noida</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Installed HVAC systems for climate control.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://cdn.flipitnews.com/img/flips/9IN1XIkqTV0npnlULTw9jzFVb8toWu4xZXe6qedy.jpg" alt="Augusta Townhomes, Sector 128, Noida" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Augusta Townhomes, Sector 128, Noida</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Executed plumbing and sewerage works.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://myrealestate.in/storage/2024/04/Jaypee-Krescent-Homes-MRE-Img-2.jpg" alt="Krescent Homes, Sector 128, Noida" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Krescent Homes, Sector 128, Noida</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Delivered plumbing and sewerage infrastructure.
+        </p>
+      </div>
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://th.bing.com/th/id/OIP.cHo100AOjrG0HY2lAHYpVQHaE8?r=0&rs=1&pid=ImgDetMain" alt="Kalpana Chawla Medical College, Karnal" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Kalpana Chawla Medical College, Karnal</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Executed plumbing works ensuring operational efficiency.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://th.bing.com/th/id/R.c015df6b5c5941b536069bfd23996e0f?rik=l%2bHygm%2b9oD4bgA&riu=http%3a%2f%2fflowtechair.com%2fwp-content%2fuploads%2f2017%2f02%2fMCD-Civic-Center-New-Delhi-768x484.png&ehk=PsGq350RaCxMywLP8d3C5ziJfeP%2bNCfES08fO0%2bUlBs%3d&risl=&pid=ImgRaw&r=0" alt="Civic Center, Minto Road, New Delhi" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Civic Center, Minto Road, New Delhi</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Installed comprehensive fire fighting systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://images.shiksha.com/mediadata/images/articles/1645443752phpf6VYbh.jpeg" alt="AIIMS, Raipur, Chhattisgarh" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">AIIMS, Raipur, Chhattisgarh</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Managed plumbing, sewerage, and installed fire fighting and alarm systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://bharatbz.com/photo/4743.jpg" alt="Civic Center (FM 200), Minto Road, New Delhi" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Civic Center (FM 200), Minto Road, New Delhi</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Installed FM 200 fire suppression systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://th.bing.com/th/id/R.3cd9deeb267281d294f405246e137f27?rik=j4wCMLkNly6Seg&riu=http%3a%2f%2fphotos.wikimapia.org%2fp%2f00%2f02%2f43%2f89%2f84_full.jpg&ehk=71FVOVWdm03HjG5sCuIf9Jx5qXYOMtwLXYDciyNYq1U%3d&risl=&pid=ImgRaw&r=0" alt="Unoc Airtel Building, Manesar" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Unoc Airtel Building, Manesar</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Delivered plumbing and fire fighting works.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://th.bing.com/th/id/R.ce77d20fdba2c2b1834919eac885278e?rik=uhbwXSEc7LeE0g&riu=http%3a%2f%2fstadiumdb.com%2fpictures%2fstadiums%2find%2fchhatrasal_stadium%2fchhatrasal_stadium17.jpg&ehk=RA6znMzwg0B6PScwl%2bj3l4JdejC5fneLGQrwoBTQW4A%3d&risl=&pid=ImgRaw&r=0" alt="Chhatrasal Stadium, New Delhi (CWG 2010)" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Chhatrasal Stadium, New Delhi (CWG 2010)</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Executed internal and external plumbing and sewerage systems.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://stellargym.co.in/img/about-img.jpg" alt="Stellar Gymkhana Club, Greater Noida" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">Stellar Gymkhana Club, Greater Noida</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Installed fire quality assured systems and carried out internal/external electrification.
+        </p>
+      </div>
+      
+      <div class="service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg">
+        <div class="relative overflow-hidden bg-gray-100 rounded-lg mb-6">
+          <img src="https://lh5.googleusercontent.com/p/AF1QipO8sF1HBXjSkRPsOslenjP9xraqIJ_fuQJ8SwkS=w408-h544-k-no" alt="NTPC Township, Jhajjar, Haryana" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <h3 class="text-xl font-normal text-gray-800 mb-3">NTPC Township, Jhajjar, Haryana</h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          Implemented water supply systems and HVAC works.
+        </p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <img src="logo.png" alt="RJ Projects Logo" class="h-12 w-auto mb-4">
+          <p class="text-gray-300 mb-4">Leading MEP solutions provider with over 25 years of experience in infrastructure development.</p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="industries.html" class="hover:text-white transition-colors">Sectors</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="plumbing.html" class="hover:text-white transition-colors">Plumbing & Sanitation</a></li>
+            <li><a href="firefighting.html" class="hover:text-white transition-colors">Fire Fighting</a></li>
+            <li><a href="electrification.html" class="hover:text-white transition-colors">Electrification</a></li>
+            <li><a href="bas-bms.html" class="hover:text-white transition-colors">BAS/BMS</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Contact Info</h3>
+          <div class="space-y-2 text-gray-300">
+            <p>C 18, Sector 105, Noida 201305</p>
+            <p>Phone: +91 9818479577</p>
+            <p>Email: rjprojects@rediffmail.com</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-300">
+        <p>&copy; 2024 RJ Projects Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Mobile menu toggle functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', function() {
+      isMenuOpen = !isMenuOpen;
+      
+      if (isMenuOpen) {
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        mobileMenuBtn.classList.add('open');
+      } else {
+        mobileMenu.style.maxHeight = '0';
+        mobileMenuBtn.classList.remove('open');
+      }
+    });
+    
+    // Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.classList.add('shadow-lg');
+        navbar.classList.remove('shadow-sm');
+      } else {
+        navbar.classList.remove('shadow-lg');
+        navbar.classList.add('shadow-sm');
+      }
+    });
+  </script>
+</body>
+</html> 
