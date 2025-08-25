@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IT & Networking Solutions - Enterprise Network Infrastructure & Connectivity Services" />
+  <meta name="keywords" content="IT networking, enterprise networks, LAN/WAN, wireless, cybersecurity, structured cabling, RJProjects" />
+  <meta name="author" content="RJProjects" />
+  <title>IT & Networking Solutions | RJProjects</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* Unified Color Palette */
+    :root {
+      --white: #ffffff;
+      --light-gray: #f5f4f4;
+      --off-white: #fefffa;
+      --black: #000000;
+      --deep-blue: #00539f;
+      --mint-green: #c3f1d5;
+      --very-light-gray: #fefefe;
+      --sky-blue: #5d95e2;
+      --charcoal: #282f39;
+      --medium-blue: #4073b3;
+    }
+    
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    
+    /* Modern Animations */
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .slide-in-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-left.visible { opacity: 1; transform: none; }
+    .slide-in-right { opacity: 0; transform: translateX(60px); transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1); }
+    .slide-in-right.visible { opacity: 1; transform: none; }
+    
+    /* Glass Effect Styles */
+    .glass-container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 4px 24px 0 rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-container:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    /* Service Card Hover Effects */
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--deep-blue), var(--medium-blue));
+      transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen">
+  <!-- Sticky Header with Navigation -->
+  <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-3 select-none">
+        <img src="logo.png" alt="RJ Projects Pvt Ltd Logo" class="h-12 w-auto object-contain" />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">About Us</a>
+        <a href="services.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Services</a>
+        <a href="epc-solutions.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">EPC Solutions</a>
+        <a href="data-centers.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Data Centers</a>
+        <a href="bas-bms.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">BAS/BMS</a>
+        <a href="it-networking.html" class="text-blue-600 font-medium transition-colors duration-200">IT & Networking</a>
+        <a href="industries.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Sectors</a>
+        <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Blog</a>
+        
+        <!-- Contact Us Button -->
+        <a href="contact.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+          Contact Us
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 focus:outline-none hamburger">
+        <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+        <span class="block w-6 h-0.5 bg-gray-700 mt-1 transition-all duration-200 transform origin-center"></span>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-200 max-h-0 overflow-hidden transition-all duration-300">
+      <div class="px-6 py-4 space-y-4">
+        <a href="about.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">About Us</a>
+        <a href="services.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Services</a>
+        <a href="epc-solutions.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">EPC Solutions</a>
+        <a href="data-centers.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Data Centers</a>
+        <a href="bas-bms.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">BAS/BMS</a>
+        <a href="it-networking.html" class="block text-blue-600 font-medium py-2">IT & Networking</a>
+        <a href="industries.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Sectors</a>
+        <a href="blog.html" class="block text-gray-700 hover:text-blue-600 font-medium py-2">Blog</a>
+        <a href="contact.html" class="block bg-blue-600 text-white px-6 py-2 rounded-full font-medium text-center mt-4">Contact Us</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Spacer for fixed header -->
+  <div class="h-20"></div>
+
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden" style="background-image: url('industry/IT Parks.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+      <div class="glass-container bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <h1 class="text-3xl md:text-5xl font-normal text-white mb-6 leading-tight">
+          <span class="bg-gradient-to-r from-indigo-300 to-indigo-100 bg-clip-text text-transparent">IT & Networking</span> Solutions
+        </h1>
+        <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          Enterprise-grade network infrastructure and connectivity solutions for modern digital businesses
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Overview Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">Comprehensive IT & Networking Services</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">End-to-end network infrastructure solutions from design to deployment and ongoing management</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <p class="text-gray-700 text-lg leading-relaxed">
+            Our IT & Networking solutions provide enterprise-grade network infrastructure and connectivity services. From LAN/WAN design to wireless networks, cybersecurity, and cloud connectivity, we deliver robust, scalable solutions that power modern digital businesses.
+          </p>
+          <p class="text-gray-700 text-lg leading-relaxed">
+            We specialize in designing, implementing, and maintaining advanced networking systems that ensure maximum performance, security, and reliability. Our comprehensive solutions include all components necessary for effective network operations, using cutting-edge technology and best practices.
+          </p>
+        </div>
+        <div class="relative">
+          <img src="industry/IT Parks.jpg" alt="IT & Networking Solutions" class="w-full h-96 object-cover rounded-2xl shadow-xl">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits Section -->
+  <section class="py-20 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">Why Choose Our IT & Networking Solutions</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Enterprise-grade infrastructure designed for performance, security, and scalability</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">High Performance</h3>
+          <p class="text-gray-600 text-sm">Gigabit+ speeds with low latency and high throughput</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Enterprise Security</h3>
+          <p class="text-gray-600 text-sm">Multi-layer security with advanced threat protection</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">Scalable Architecture</h3>
+          <p class="text-gray-600 text-sm">Future-proof design that grows with your business</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-normal text-gray-800 mb-2">24/7 Support</h3>
+          <p class="text-gray-600 text-sm">Round-the-clock monitoring and technical support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid Section -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">IT & Networking Services</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Complete range of network infrastructure and connectivity solutions</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="it-services-grid">
+        <!-- Services will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Partners Section -->
+  <section class="py-20 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-normal text-gray-800 mb-4">Technology Partners</h2>
+        <p class="text-gray-600 text-xl max-w-3xl mx-auto">Working with leading technology vendors to deliver best-in-class solutions</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-lg font-bold text-gray-600">Cisco</span>
+          </div>
+          <p class="text-gray-600 text-sm">Networking</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-lg font-bold text-gray-600">HP</span>
+          </div>
+          <p class="text-gray-600 text-sm">Infrastructure</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-lg font-bold text-gray-600">Dell</span>
+          </div>
+          <p class="text-gray-600 text-sm">Servers</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-lg font-bold text-gray-600">Fortinet</span>
+          </div>
+          <p class="text-gray-600 text-sm">Security</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-lg font-bold text-gray-600">Aruba</span>
+          </div>
+          <p class="text-gray-600 text-sm">Wireless</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-lg font-bold text-gray-600">VMware</span>
+          </div>
+          <p class="text-gray-600 text-sm">Virtualization</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-6 bg-blue-600">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-normal text-white mb-6">Ready to Upgrade Your Network?</h2>
+      <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+        Get in touch with our IT & Networking experts to discuss your infrastructure requirements
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="contact.html" class="bg-white text-blue-600 px-8 py-3 rounded-full font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+          Get a Quote
+        </a>
+        <a href="#" class="border-2 border-white text-white px-8 py-3 rounded-full font-medium transition-all duration-200 hover:bg-white hover:text-blue-600">
+          Download IT Solutions Brochure
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <img src="logo.png" alt="RJ Projects Logo" class="h-12 w-auto mb-4">
+          <p class="text-gray-300 mb-4">Leading MEP solutions provider with over 25 years of experience in infrastructure development.</p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="industries.html" class="hover:text-white transition-colors">Sectors</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Services</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="plumbing.html" class="hover:text-white transition-colors">Plumbing & Sanitation</a></li>
+            <li><a href="firefighting.html" class="hover:text-white transition-colors">Fire Fighting</a></li>
+            <li><a href="electrification.html" class="hover:text-white transition-colors">Electrification</a></li>
+            <li><a href="bas-bms.html" class="hover:text-white transition-colors">BAS/BMS</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-normal mb-4">Contact Info</h3>
+          <div class="space-y-2 text-gray-300">
+            <p>C 18, Sector 105, Noida 201305</p>
+            <p>Phone: +91 9818479577</p>
+            <p>Email: rjprojects@rediffmail.com</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-300">
+        <p>&copy; 2024 RJ Projects Pvt. Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+      const isOpen = mobileMenu.style.maxHeight !== '0px';
+      mobileMenu.style.maxHeight = isOpen ? '0px' : '500px';
+      
+      // Animate hamburger
+      const spans = mobileMenuBtn.querySelectorAll('span');
+      spans.forEach((span, index) => {
+        if (index === 0) {
+          span.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg) translate(5px, 5px)';
+        } else if (index === 1) {
+          span.style.opacity = isOpen ? '1' : '0';
+        } else if (index === 2) {
+          span.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(-45deg) translate(7px, -6px)';
+        }
+      });
+    });
+    
+    // IT & Networking Services Data
+    const itServices = [
+      {
+        icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z',
+        title: 'Network Design & Architecture',
+        description: 'LAN/WAN design, network segmentation, VLANs, routing protocols, and capacity planning',
+        color: 'from-blue-100 to-blue-200',
+        iconColor: 'text-blue-600'
+      },
+      {
+        icon: 'M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0',
+        title: 'Wireless Networks',
+        description: 'Wi-Fi 6/6E deployment, mesh networks, outdoor coverage, and wireless security',
+        color: 'from-yellow-100 to-yellow-200',
+        iconColor: 'text-yellow-600'
+      },
+      {
+        icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+        title: 'Cybersecurity Solutions',
+        description: 'Firewalls, IDS/IPS, VPN, endpoint protection, and security monitoring',
+        color: 'from-red-100 to-red-200',
+        iconColor: 'text-red-600'
+      },
+      {
+        icon: 'M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0',
+        title: 'Structured Cabling',
+        description: 'Fiber/copper cabling, patch panels, cable management, and testing/certification',
+        color: 'from-purple-100 to-purple-200',
+        iconColor: 'text-purple-600'
+      },
+      {
+        icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 2 0 104 0 2 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+        title: 'Cloud Connectivity',
+        description: 'SD-WAN, MPLS, internet connectivity, and cloud service integration',
+        color: 'from-cyan-100 to-cyan-200',
+        iconColor: 'text-cyan-600'
+      },
+      {
+        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+        title: 'Network Monitoring',
+        description: 'SNMP monitoring, network management, performance analytics, and alerting',
+        color: 'from-green-100 to-green-200',
+        iconColor: 'text-green-600'
+      },
+      {
+        icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+        title: 'Access Control',
+        description: 'NAC, 802.1X, guest access, and user authentication systems',
+        color: 'from-gray-100 to-gray-200',
+        iconColor: 'text-gray-600'
+      },
+      {
+        icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+        title: 'Disaster Recovery',
+        description: 'Backup solutions, failover systems, and business continuity planning',
+        color: 'from-indigo-100 to-indigo-200',
+        iconColor: 'text-indigo-600'
+      },
+      {
+        icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+        title: 'Network Optimization',
+        description: 'QoS, traffic shaping, bandwidth management, and performance tuning',
+        color: 'from-orange-100 to-orange-200',
+        iconColor: 'text-orange-600'
+      },
+      {
+        icon: 'M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 1 1 3-3.87M16 3.13a4 4 0 1 1-8 0 4 4 0 018 0z',
+        title: 'Managed IT Services',
+        description: '24/7 monitoring, help desk support, and proactive maintenance',
+        color: 'from-pink-100 to-pink-200',
+        iconColor: 'text-pink-600'
+      },
+      {
+        icon: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
+        title: 'VoIP & Unified Communications',
+        description: 'IP telephony, video conferencing, and collaboration tools',
+        color: 'from-teal-100 to-teal-200',
+        iconColor: 'text-teal-600'
+      },
+      {
+        icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+        title: 'Network Consulting',
+        description: 'Technology assessment, migration planning, and strategic consulting',
+        color: 'from-emerald-100 to-emerald-200',
+        iconColor: 'text-emerald-600'
+      }
+    ];
+    
+    // Render IT & Networking Services
+    function renderITServices() {
+      const grid = document.getElementById('it-services-grid');
+      itServices.forEach(service => {
+        const card = document.createElement('div');
+        card.className = 'service-card glass-container bg-white/80 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 shadow-lg';
+        card.innerHTML = `
+          <div class="relative overflow-hidden bg-gradient-to-br ${service.color} rounded-lg mb-6 h-48 flex items-center justify-center">
+            <svg class="w-16 h-16 ${service.iconColor}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="${service.icon}"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-normal text-gray-800 mb-3">${service.title}</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+            ${service.description}
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300">
+            Learn More
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      renderITServices();
+    });
+  </script>
+</body>
+</html>
